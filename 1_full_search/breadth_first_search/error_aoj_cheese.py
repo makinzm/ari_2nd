@@ -4,7 +4,12 @@ problem URL: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0558
 Time:16:00-17:38
 
 ERROR: visitedの更新の仕方に間違いがある.
+
+copyの方法をdeepcopyにしたことで解決した.
+しかし,この方法では分岐が多くなるため,かなり時間がかかるため
+アルゴリズムとしてOUT
 """
+import copy
 
 h,w,n=map(int,input().split())
 city=[list(input()) for _ in range(h)]
@@ -42,12 +47,11 @@ def bfs(x,y,hp,step):
     if city[y][x]=='X':
         return 0
     elif city[y][x]=='.':
-        tmp_visited=visited
-        print(tmp_visited)
+        tmp_visited=copy.deepcopy(visited)
         for i in range(4):
             nx,ny=x+dx[i],y+dy[i]
             bfs(nx,ny,hp,step+1)
-            visited=tmp_visited
+            visited=copy.deepcopy(tmp_visited)
         return 0
     else:
         if int(city[y][x])<=hp:
@@ -55,24 +59,24 @@ def bfs(x,y,hp,step):
                 lst.append(step)
                 return 0
             tmp_city=city[y][x]
-            tmp_visited=visited
+            tmp_visited=copy.deepcopy(visited)
             city[y][x]='.'
             visited=[[False for _ in range(h)] for _ in range(w)]
             visited[x][y]=True
-            tmptmpvisited=visited
+            tmptmpvisited=copy.deepcopy(visited)
             for i in range(4):
                 nx,ny=x+dx[i],y+dy[i]
                 bfs(nx,ny,hp+1,step+1)
-                visited=tmptmpvisited
+                visited=copy.deepcopy(tmptmpvisited)
             city[y][x]=tmp_city
-            visited=tmp_visited
+            visited=copy.deepcopy(tmp_visited)
             return 0
         else:
-            tmp_visited=visited
+            tmp_visited=copy.deepcopy(visited)
             for i in range(4):
                 nnx,nny=x+dx[i],y+dy[i]
                 bfs(nnx,nny,hp,step+1)
-                visited=tmp_visited
+                visited=copy.deepcopy(tmp_visited)
             return 0
 
 bfs(sx,sy,1,0)

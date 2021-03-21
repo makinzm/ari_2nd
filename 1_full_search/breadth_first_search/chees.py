@@ -2,6 +2,10 @@
 Problem URL:https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0558
 
 参考 URL: https://tsutaj.hatenablog.com/entry/2017/12/23/000000
+
+また,ネズミの体力に設定を加えた場合は,
+おそらくそれぞれのチーズ同士の距離をダイクストラ法で解き
+どの段階でどのチーズを食べれるかを判定して,組み合わせを考える必要がある.
 """
 import queue
 
