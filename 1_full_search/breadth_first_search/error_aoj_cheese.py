@@ -77,5 +77,4 @@ def bfs(x,y,hp,step):
 
 bfs(sx,sy,1,0)
 
-print(lst)
 print(min(lst))
