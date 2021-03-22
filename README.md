@@ -13,5 +13,7 @@ I don't know if it's the correct answer because there is no explanation about th
 
 ## Reference
 プログラミングコンテストチャレンジブック
+
 著者 : 秋葉拓哉,岩田陽一,北川宜稔
+
 発行所 : 株式会社 マイナビ出版
