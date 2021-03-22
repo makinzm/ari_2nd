@@ -24,6 +24,7 @@ def calc(l,m):
 
 for x in itertools.permutations(range(1,n+1)):
     final=calc(list(x),n)
+    #タプルだとimmutableのため関数の処理としてはlistで扱うことにした
     if final==f:
         ans=x
         break
