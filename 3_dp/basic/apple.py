@@ -6,10 +6,12 @@ bruise: /bruːz/
  caused by a blow or impact rupturing underlying blood vessels.
 [v]:inflict a bruise or bruises on (a part of the body).
 
-Time: 0:00-1:00
+Time: 0:00-1:00+0:05
 
 苦戦した理由: dp_lstを[[]*t]*wにすると参照先が同じとなってしまい
         更新がうまくいかないことを知らなかった.
+
+W回までのジャンプを行うため,W回以下のものも検討する必要がある.
 
 python実験
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -42,12 +44,6 @@ def dp(time,x):
     global dp_lst
     if x==0 and time==0:
         dp_lst[time][x]=0
-    """
-    elif x==0 and time==1:
-        dp_lst[time][x]=to_int(lst[time-1]==1)
-    elif x==1 and time==1:
-        dp_lst[time][x]=to_int(lst[time-1]==2)
-    """
     if x<0 or time<0 or x>time:
         return 0
     if dp_lst[time][x]==-1:
@@ -59,6 +55,9 @@ def dp(time,x):
             dp_lst[time][x]=max(dp(time-1,x),dp(time-1,x-1))+to_int(lst[time-1]==2)
     return dp_lst[time][x]
 
-k=dp(t,w)
+ans_lst=[]
+for jump in range(w+1):
+    ans_lst.append(dp(t,jump))
 
-print(dp_lst[t][w])
+#print(dp_lst)
+print(max(ans_lst))
