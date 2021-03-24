@@ -40,10 +40,9 @@ def dp(i,j):
             return dp_lst[i][j]
 
 ans_lst=[]
-for i in range(n):
-    for j in range(i+1):
-        k=dp(i,j)
-        if i==n-1:
-            ans_lst.append(k)
+#for i in range(n):
+for j in range(n):
+    k=dp(n-1,j)
+    ans_lst.append(k)
 
 print(max(ans_lst))
