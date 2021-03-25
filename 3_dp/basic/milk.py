@@ -28,6 +28,7 @@ for time in range(1,n+1):
         while(nl!=[] and nl[0][1]==time):
             flag=-1
             s,e,eff=nl[0]
+            # prev=max(0,s-r)として書いた方がきれいになる.
             if s-r<0:
                 dp_lst[time]=max([eff,dp_lst[time-1],dp_lst[time]])
             else:
