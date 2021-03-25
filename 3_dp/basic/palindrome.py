@@ -60,7 +60,7 @@ dp=[[INF for _ in range(length+1)]for _ in range(length)]
 
 """
     dp[i][j]: iからj文字目まで[i,j)を回文にするため必要な経費を返す.
-    0<=i<=length-1, 0<=j<=length
+    0<=i<=length-1, 0<=j<=length, 0<=j-i<=length
 
     dp[i][i]=dp[i][i+1]=0
     dp[i-1][j]=min(dp[i-1][j],dp[i][j]+mydic[name[i-1]])
@@ -68,18 +68,59 @@ dp=[[INF for _ in range(length+1)]for _ in range(length)]
     dp[i-1][j+1]=dp[i][j]  (if name[i-1]==name[j])
                            ( cost(aXa)=cost(X) )
 """
+
+updated=[[False for _ in range(length+1)]for _ in range(length)]
+
 for i in range(length):
     dp[i][i]=0
     dp[i][i+1]=0
+    updated[i][i]=True
+    updated[i][i+1]=True
 
-for i in range(length):
-    for j in range(i,length+1):
-        if i>0:
+
+##　文字列の短いものから更新するようにすることで,問題なく更新できる,　
+## というのも...
+for len_name in range(length+1):
+    for i in range(length):
+        j=i+len_name
+        if i>0 and j<=length:
+            ## ここにおいてdp[i-1][j]を見るとき j-(i-1)>j-iのためdp[i][j]は既に更新済みのため
             dp[i-1][j]=min(dp[i-1][j],dp[i][j]+mydic[name[i-1]])
-        if j<length:
+            updated[i-1][j]=True
+        if i>=0 and j<length:
+            ## ここにおいてdp[i][j+1]を見るとき j+1-i>j-iのためdp[i][j]は既に更新済みのため
             dp[i][j+1]=min(dp[i][j+1],dp[i][j]+mydic[name[j]])
+            updated[i][j+1]=True
         if i>0 and j< length and name[i-1]==name[j]:
+            ## ここにおいてdp[i-1][j+1]を見るとき j+1-(i-1)>j-iのためdp[i][j]は既に更新済みのため
             dp[i-1][j+1]=dp[i][j]
+            updated[i-1][j+1]=True
 
-print(dp[0][length])
-print(dp)
+# print(dp[0][m])
+# しかし,このコードの場合,毎回異なった更新(i-1,j),(i,j+1),(i-1,j+1)の更新を行っているため,個人的に本当に探索し切れたかわかりづらい.
+# そのため,dp(s,length)としてスタートの文字がs文字目でlengthの長さだった際の文字列を回文にすることを考えると.
+"""
+dp[i][0]=dp[i][1]=0
+dp[i][x]=min(dp[i][x],dp[i+1][x-1]+mydic[name[i-1]])
+dp[i][x]=min(dp[i][x],dp[i][x-1]+mydic[name[i+x-1]])
+dp[i][x]=dp[i+1][x-2] if name[i-1]==name[i+x-1]
+
+とした方が安心する
+"""
+dp_new=[[INF for _ in range(m+1)]for _ in range(m+1)]
+
+for i in range(1,m+1):
+    dp_new[i][0]=0
+    dp_new[i][1]=0
+
+for x in range(2,m+1):
+    for s in range(1,m+1):
+        if s+x-2<m:
+            dp_new[s][x]=min(dp_new[s][x],dp_new[s][x-1]+mydic[name[s+x-2]])
+        if s+1<m+1 and s-2<m:
+            dp_new[s][x]=min(dp_new[s][x],dp_new[s+1][x-1]+mydic[name[s-1]])
+        if s+x-2<m and s-1<m and s+1<m+1 and name[s-1]==name[s+x-2]:
+            dp_new[s][x]=min(dp_new[s][x],dp_new[s+1][x-2])
+            # 今までここで dp[s][x]>=dp[s+1][x-2]は自明としてきたと思うが,
+            # 根拠が今わからないため,一応minを挟んでおく.
+print(dp_new[1][m])
