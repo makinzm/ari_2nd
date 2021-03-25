@@ -28,20 +28,16 @@ nl=lst
 for time in range(1,n+1):
     if dp_lst[time]==0:
         flag=time
-        nl=[(s,e,eff) for(s,e,eff) in nl if e>=time]
-        for s,e,eff in nl:
-            if time==e:
-                flag=-1
-                if s-r<0:
-                    dp_lst[time]=max([eff,dp_lst[time-1],dp_lst[time]])
-                else:
-                    dp_lst[time]=max([dp_lst[s-r]+eff,dp_lst[time-1],dp_lst[time]])
+        while(nl!=[] and nl[0][1]==time):
+            flag=-1
+            s,e,eff=nl[0]
+            if s-r<0:
+                dp_lst[time]=max([eff,dp_lst[time-1],dp_lst[time]])
             else:
-                if flag==-1:
-                    break
-                else:
-                    dp_lst[time]=dp_lst[time-1]
-                    break
+                dp_lst[time]=max([dp_lst[s-r]+eff,dp_lst[time-1],dp_lst[time]])
+            nl=nl[1:]
+        if flag!=-1:
+            dp_lst[time]=dp_lst[time-1]
 print(dp_lst[n])
 
 
@@ -50,7 +46,7 @@ print(dp_lst[n])
 #
 # また関数の方がlstの更新を行えないためlstの探索が多いため,計算量として好ましくない
 # また関数でstの更新を行うためには,どのlstを探索させるかをいちいち考える必要があるため好ましくない.
-# 関数でないものは先頭から順にdp_lstだけでなく,lstも減らしながら更新できるため効率が良い
+# 関数でないものは先頭から順にdp_lstの更新だけでなく,考える仕事のlstも減らしながら更新できるため効率が良い
 
 dp_lst=[0 for _ in range(n+1)]
 nl=lst
