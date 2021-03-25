@@ -21,10 +21,7 @@ lst.sort(key=lambda x: x[1])
 
 dp_lst=[0 for _ in range(n+1)]
 
-dp_lst[0]=0
-
 nl=lst
-
 for time in range(1,n+1):
     if dp_lst[time]==0:
         flag=time
