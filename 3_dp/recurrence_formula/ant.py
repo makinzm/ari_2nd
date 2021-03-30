@@ -5,6 +5,7 @@ Time:13:09-14:21
 
 苦戦した理由:dpの再起構造を作ることに慣れていなかったから
 しかし,これでは計算量の多いアルゴリズムとなってしまうため,改善の余地があると思う.
+10^7だからセーフ?
 
 poke around: look around a place, typically in search of something.
 
