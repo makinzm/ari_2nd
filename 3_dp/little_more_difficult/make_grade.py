@@ -4,6 +4,10 @@ Problem URL: http://poj.org/problem?id=3666
 Time : 15:22-16:03
 
 It is difficult ...汗
+
+Reference: https://tsutaj.hatenablog.com/entry/2018/03/04/012113
+
+dp=f(dp)+c として,dpの更新式が多少複雑な形
 """
 
 n=int(input())
