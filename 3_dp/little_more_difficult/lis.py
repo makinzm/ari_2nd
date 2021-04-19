@@ -2,7 +2,7 @@
 problem URL: http://poj.org/problem?id=1631
 
 この問題はLIS(longest Increasing Subsequence)と呼ばれる問題で,
-参考図書のp63にも解法が載っているものである.
+参考図書のp65にも解法が載っているものである.
 
 今回の場合,前から順に見ていけば良いため.
 dp[i]=長さがi+1であるような増加部分列における最終要素の最小の値
