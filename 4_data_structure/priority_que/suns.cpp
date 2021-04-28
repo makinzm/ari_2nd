@@ -5,7 +5,7 @@
 #include <map>
 #include <algorithm>
 
-// g++
+// g++ -std=c++11
 int main(){
     int c,l;
     std::cin >> c >>l;
@@ -15,13 +15,7 @@ int main(){
         std::cin >> a>> b;
         cows[i]=std::make_pair(a,b);
     }
-    /**
-     * static std::pair<int,int> lotion[2500];
-        for (int i = 0; i < l; i++) {
-        std::cin >> lotion[i].first >> lotion[i].second;
-        }
-     * 
-    **/ 
+    
     std::vector<std::pair<int, int> > lotion(2500);
     for (int i = 0; i < l; i++) {
         int a,b;
@@ -29,7 +23,10 @@ int main(){
         lotion[i]=std::make_pair(a,b);
     }
 
-    sort(cows.begin(), cows.begin()+c);
+     sort(cows.begin(),cows.begin()+c,[](std::pair<int, int> &a,std::pair<int,int> &b){return 
+     a.second < b.second;
+     });
+    
     sort(lotion.begin(), lotion.begin()+l);
 
     int ans=0;

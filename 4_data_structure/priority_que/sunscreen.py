@@ -21,7 +21,7 @@ for i in range(l):
 
 そうすればO(c*l)<9*10^6 で実行できる
 """
-cows.sort(key=lambda x:x[0])
+cows.sort(key=lambda x:x[1])
 lotion.sort(key=lambda x:x[0])
 
 ans=0
