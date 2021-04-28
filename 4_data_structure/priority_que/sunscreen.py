@@ -24,13 +24,11 @@ for i in range(l):
 cows.sort(key=lambda x:x[0])
 lotion.sort(key=lambda x:x[0])
 
-used_cows=[False for _ in range(c)]
 ans=0
 for i in range(c):
     for j in range(l):
-        if not(used_cows[i]) and cows[i][0]<=lotion[j][0] and cows[i][1]>=lotion[j][0] and lotion[j][1]>0:
+        if cows[i][0]<=lotion[j][0] and cows[i][1]>=lotion[j][0] and lotion[j][1]>0:
             ans+=1
             lotion[j][1]-=1
-            used_cows[i]=True
             break
 print(ans)
