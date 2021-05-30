@@ -17,3 +17,5 @@ I don't know if it's the correct answer because there is no explanation about th
 著者 : 秋葉拓哉,岩田陽一,北川宜稔
 
 発行所 : 株式会社 マイナビ出版
+
+(現在,休止中(夏休みに入ったら開始予定))
